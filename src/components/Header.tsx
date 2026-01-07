@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 export default function Header() {
 
   return (
@@ -5,10 +7,10 @@ export default function Header() {
       <h1 className="text-2xl font-bold">Matthew Soegiono</h1>
 
       <div className="space-x-4 inline-flex">
-        <div> Home </div>
-        <div> About </div>
-        <div> Projects </div>
-        <div> Contact </div>
+        <Link to="/"> Home </Link>
+        <Link to="/about"> About </Link>
+        <Link to="/projects"> Projects </Link>
+        <Link to="/contact"> Contact </Link>
       </div>
     </header>
   )
