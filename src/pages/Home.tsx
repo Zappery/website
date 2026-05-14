@@ -1,4 +1,14 @@
+import { HashLink } from 'react-router-hash-link';
+import { useState } from 'react';
+
 export default function Home() {
+  const [activeTab, setActiveTab] = useState('about');
+
+  const navItems = [
+    { id: 'about', label: 'About', link: '/about' },
+    { id: 'projects', label: 'Projects', link: '/projects' },
+    { id: 'contact', label: 'Contact', link: '/contact' },
+  ];
 
   return (
   <>
@@ -15,23 +25,33 @@ export default function Home() {
         Soegiono
       </h1>
 
+      {/* Navigation Items */}
+      {/*
+        Need to group the HashLink as a label for the radio button
+      */}
       <ul className="grid grid-cols-1">
-        <li className="flex items-center">
-          <input
-            type="radio"
-            id="about"
-            className="peer h-4 w-4 cursor-pointer flex-shrink-0 accent-black"
-            name="page"
-          />
-          <label
-            htmlFor="about"
-            className="block cursor-pointer pl-4"
-          >
-            <div className="font-medium text-xl">About</div>
-          </label>
-        </li>
+        {navItems.map((item) => (
+          <li key={item.id} className="flex items-center">
+            <input
+              type="radio"
+              id={item.id}
+              className="peer h-4 w-4 cursor-pointer flex-shrink-0 accent-black"
+              name="page"
+              checked={activeTab === item.id}
+              onChange={() => setActiveTab(item.id)}
+            />
+            <label
+              htmlFor={item.id}
+              className="block cursor-pointer pl-4"
+            >
+              <div className="font-medium text-xl"><HashLink smooth to={item.link} onClick={() => setActiveTab(item.id)}>
+                {item.label}
+              </HashLink></div>
+            </label>
+          </li>
+        ))}
 
-        <li className="flex items-center">
+        {/* <li className="flex items-center">
           <input
             type="radio"
             id="projects"
@@ -42,7 +62,7 @@ export default function Home() {
             htmlFor="projects"
             className="block cursor-pointer pl-4"
           >
-            <div className="font-medium text-xl">Projects</div>
+            <div className="font-medium text-xl"><HashLink smooth to="/#projects">Projects</HashLink></div>
           </label>
         </li>
 
@@ -57,9 +77,9 @@ export default function Home() {
             htmlFor="contact"
             className="block cursor-pointer pl-4"
           >
-            <div className="font-medium text-xl">Contact</div>
+            <div className="font-medium text-xl"><HashLink smooth to="/#contact">Contact</HashLink></div>
           </label>
-        </li>
+        </li> */}
       </ul>
     </div>
   </>
